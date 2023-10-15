@@ -9,3 +9,6 @@ def index(request):
 
 def teste(request):
     return render(request, 'galeria/index.html')
+
+def imagem(request):
+    return render(request, 'galeria/imagem.html')

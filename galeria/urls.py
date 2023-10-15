@@ -4,5 +4,6 @@ from galeria.views import *
 
 urlpatterns = [
     path('', index),
-    path('teste', teste)
+    path('teste', teste),
+    path('imagem/', imagem),
 ]
