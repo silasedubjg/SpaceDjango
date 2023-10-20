@@ -17,3 +17,7 @@ def teste(request):
 def imagem(request, foto_id):
     fotografia = Fotografia.objects.filter(id=foto_id)
     return render(request, 'galeria/imagem.html', {"foto" : fotografia})
+
+def buscar(request):
+    
+    return render(request, 'galeria/buscar.html')
