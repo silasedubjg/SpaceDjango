@@ -19,5 +19,9 @@ def imagem(request, foto_id):
     return render(request, 'galeria/imagem.html', {"foto" : fotografia})
 
 def buscar(request):
-    
-    return render(request, 'galeria/buscar.html')
+    fotografia = Fotografia.objects.order_by("data_fotografia").filter(publicada=True)
+    if "buscar" in request.GET:
+        tag = request.GET['buscar']
+        if tag:
+            fotografia = fotografia.filter(nome__icontains=tag)
+    return render(request, 'galeria/buscar.html', {"cards" : fotografia})
