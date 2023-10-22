@@ -7,10 +7,34 @@ from templates import *
 from usuarios.forms import LoginForm, cadastroForm
 
 from django.contrib.auth.models import User
+
+from django.contrib import auth
 # Create your views here.
 
 def login(request):
     form= LoginForm()
+
+    if request.method=='POST':
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            nome=form['nome_login'].value()
+            senha=form['senha'].value()
+
+            print(nome+senha)
+            usuario = auth.authenticate(
+                request,
+                username=nome,
+                password=senha
+            )
+
+            if usuario is not None:
+                print('não é none')
+                auth.login(request, usuario)
+                return redirect('Home')
+            else:
+                return redirect('login')
+    
     return render(request, 'usuarios/login.html', {'form': form})
 
 def cadastro(request):
