@@ -8,7 +8,8 @@ from galeria.models import *
 
 
 def index(request):
-    return HttpResponse('<h1> Space</h1><p> Projeto em Django de um site para apresentar imagens do espaço<p>')
+    dados = Fotografia.objects.order_by("data_fotografia").filter(publicada=True)
+    return render(request, 'galeria/index.html', {"cards" : dados})
 
 def teste(request):
     dados = Fotografia.objects.order_by("data_fotografia").filter(publicada=True)
