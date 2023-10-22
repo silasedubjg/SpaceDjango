@@ -9,6 +9,8 @@ from usuarios.forms import LoginForm, cadastroForm
 from django.contrib.auth.models import User
 
 from django.contrib import auth
+
+from django.contrib import messages
 # Create your views here.
 
 def login(request):
@@ -31,8 +33,10 @@ def login(request):
             if usuario is not None:
                 print('não é none')
                 auth.login(request, usuario)
+                messages.success(request, f"{nome} logado com sucesso")
                 return redirect('Home')
             else:
+                messages.error(request, "erro ao logar")
                 return redirect('login')
     
     return render(request, 'usuarios/login.html', {'form': form})
@@ -54,6 +58,7 @@ def cadastro(request):
             print(name+email+senha)
 
             if User.objects.filter(username=name).exists():
+                messages.success(request, f"Usuário {name} já cadastrado")
                 redirect('cadastro')
 
             usuario = User(username=name,
@@ -61,6 +66,7 @@ def cadastro(request):
                            password=senha)
             
             usuario.save()
+            messages.success(request, f"{name} logado com sucesso")
             return redirect('login')
 
 

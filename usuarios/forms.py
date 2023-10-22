@@ -30,7 +30,7 @@ class cadastroForm(forms.Form):
             max_length=100,
             label="Senha",
             required=True,
-            widget=forms.PasswordInput(attrs={'placeholder': 'Ex: usuario@mysite.com', 'class': 'form-control'}),
+            widget=forms.TextInput(attrs={'placeholder': 'Ex: usuario@mysite.com', 'class': 'form-control'}),
 
         )
         senha=forms.CharField(
