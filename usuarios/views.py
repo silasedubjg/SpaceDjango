@@ -46,7 +46,10 @@ def cadastro(request):
 
     if request.method == 'POST':
         form = cadastroForm(request.POST)
-
+        name=form['nome_cadastro'].value()
+        if User.objects.filter(username=name):
+            messages.success(request, f"Usuário {name} já cadastrado")
+            return render(request, 'usuarios/cadastro.html', {'form': form})
         if form.is_valid:
             if form['senha'].value != form['senha2'].value:
                 redirect('cadastro')
@@ -54,8 +57,6 @@ def cadastro(request):
             name=form['nome_cadastro'].value()
             email=form['email'].value()
             senha=form['senha'].value()
-
-            print(name+email+senha)
 
             if User.objects.filter(username=name).exists():
                 messages.success(request, f"Usuário {name} já cadastrado")
@@ -68,6 +69,9 @@ def cadastro(request):
             usuario.save()
             messages.success(request, f"{name} logado com sucesso")
             return redirect('login')
+        else:
+            
+            return render(request, 'usuarios/cadastro.html', {'form': form})
 
 
     return render(request, 'usuarios/cadastro.html', {'form': form})
@@ -76,3 +80,4 @@ def logout(request):
     auth.logout(request)
     messages.success(request, "logout realizado com sucesso")
     return redirect('login')
+

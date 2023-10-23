@@ -383,6 +383,12 @@ table {
     cursor: pointer;
 }
 
+.alert-warning {
+    --bs-alert-color: #664d03;
+    --bs-alert-bg: #fff3cd;
+    --bs-alert-border-color: #ffecb5;
+}
+
 .alert {
     --bs-alert-bg: transparent;
     --bs-alert-padding-x: 1rem;
@@ -399,10 +405,4 @@ table {
     background-color: var(--bs-alert-bg);
     border: var(--bs-alert-border);
     border-radius: var(--bs-alert-border-radius);
-}
-
-.alert-warning {
-    --bs-alert-color: #664d03;
-    --bs-alert-bg: #fff3cd;
-    --bs-alert-border-color: #ffecb5;
 }
