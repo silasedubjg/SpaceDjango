@@ -1,0 +1,7 @@
+{% if messages %}
+    {% for alert in messages%}
+    <div class="alert alert-{{ alert.tags }}">
+        {{alert}}
+    </div>
+    {% endfor %}
+{% endif %}

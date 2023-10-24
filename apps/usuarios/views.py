@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 from templates import *
 
-from usuarios.forms import LoginForm, cadastroForm
+from apps.usuarios.forms import LoginForm, cadastroForm
 
 from django.contrib.auth.models import User
 
@@ -20,6 +20,8 @@ def login(request):
         form = LoginForm(request.POST)
 
         if form.is_valid():
+            print('valido')
+
             nome=form['nome_login'].value()
             senha=form['senha'].value()
 
@@ -36,6 +38,11 @@ def login(request):
                 messages.success(request, f"{nome} logado com sucesso")
                 return redirect('Home')
             else:
+                print('erro ao logar 2')
+
+                messages.error(request, "erro ao logar")
+                return redirect('login')
+        else:
                 messages.error(request, "erro ao logar")
                 return redirect('login')
     
@@ -48,7 +55,7 @@ def cadastro(request):
         form = cadastroForm(request.POST)
         name=form['nome_cadastro'].value()
         if User.objects.filter(username=name):
-            messages.success(request, f"Usuário {name} já cadastrado")
+            messages.error(request, f"Usuário {name} já cadastrado")
             return render(request, 'usuarios/cadastro.html', {'form': form})
         if form.is_valid:
             if form['senha'].value != form['senha2'].value:
@@ -59,7 +66,7 @@ def cadastro(request):
             senha=form['senha'].value()
 
             if User.objects.filter(username=name).exists():
-                messages.success(request, f"Usuário {name} já cadastrado")
+                messages.error(request, f"Usuário {name} já cadastrado")
                 redirect('cadastro')
 
             usuario = User(username=name,
@@ -67,7 +74,7 @@ def cadastro(request):
                            password=senha)
             
             usuario.save()
-            messages.success(request, f"{name} logado com sucesso")
+            messages.success(request, f"{name} cadastrado com sucesso")
             return redirect('login')
         else:
             

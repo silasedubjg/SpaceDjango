@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from galeria.models import *
+from apps.galeria.models import *
 
 class ListaFotografias(admin.ModelAdmin):
     list_display = ("id","nome", "creditos")

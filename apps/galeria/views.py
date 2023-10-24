@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 from templates import *
 
-from galeria.models import *
+from apps.galeria.models import *
 
 
 def index(request):

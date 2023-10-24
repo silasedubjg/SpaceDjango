@@ -1,4 +1,4 @@
-{% extends 'galeria/base.html' %}
+{% extends 'shared/base.html' %}
 {% load static %}
 {% block content %}
 <body>
@@ -13,7 +13,7 @@
             </div>
         </header>
         <main class="principal">
-            {% include 'galeria/partials/_menu.html' %}
+            {% include 'partials/_menu.html' %}
             {% for fotografias in foto %}
                 
                 <section class="conteudo">
