@@ -42,7 +42,7 @@
                 </nav>
             </section>
             <section class="galeria" style="margin-left: 5em">
-                <form action="{% url 'addimagem' %}" method="POST">
+                <form action="{% url 'addimagem' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="pagina-inicial">
                         {% for campo in form.visible_fields %}
