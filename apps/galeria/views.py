@@ -34,3 +34,13 @@ def buscar(request):
         if tag:
             fotografia = fotografia.filter(nome__icontains=tag)
     return render(request, 'galeria/buscar.html', {"cards" : fotografia})
+
+
+def adicionarimagem(request):
+    return render(request, 'galeria/adicionarimagem.html')
+
+def deletarimagem(request):
+    return render(request, 'galeria/deletarimagem.html')
+
+def editarimagem(request):
+    return render(request, 'galeria/editarimagem.html')
